@@ -60,7 +60,7 @@ To transition from passive threat detection to proactive risk management, I conf
 * **Endpoint Scanning:** The Windows 11 agent's `syscollector` module gathered the installed software inventory and cross-referenced it against the CVE feeds.
 * **Detection:** The SIEM successfully identified endpoint vulnerabilities, flagging 1 High and 2 Medium severity CVEs associated with the QEMU guest agent used for virtualization.
 
-![Vulnerability Detection Dashboard](07-vulnerability-detection.jpg)
+![Vulnerability Detection Dashboard](07-vulnerability-detection.png)
 
 ---
 
