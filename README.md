@@ -53,6 +53,15 @@ To test rapid event correlation, I simulated a brute-force attack on the Windows
 
 ![Brute Force Detection](11-bruteforce-detection.png)
 
+### 3. Vulnerability Management & CVE Scanning
+To transition from passive threat detection to proactive risk management, I configured the SIEM to identify unpatched endpoint software.
+
+* **The Configuration:** Enabled the global `<vulnerability-detection>` module in the manager's `ossec.conf` file to download historical and real-time CVE databases (National Vulnerability Database).
+* **Endpoint Scanning:** The Windows 11 agent's `syscollector` module gathered the installed software inventory and cross-referenced it against the CVE feeds.
+* **Detection:** The SIEM successfully identified endpoint vulnerabilities, flagging 1 High and 2 Medium severity CVEs associated with the QEMU guest agent used for virtualization.
+
+![Vulnerability Detection Dashboard](07-vulnerability-detection.jpg)
+
 ---
 
 ## ⚙️ Automated Active Response
@@ -79,3 +88,5 @@ Building this environment required significant backend systems engineering:
 ## 💡 SOC Analyst Takeaways
 1. **Granular Context:** Investigating raw Windows Event JSON payloads provides context that simple alerts lack. It allows analysts to identify the exact threat actor origin (Subject User) alongside the targeted system entity.
 2. **The Power of Automation:** Active response reduces MTTR from hours to milliseconds. However, proper network whitelisting in the `ossec.conf` file is critical to prevent automated remediation from locking out legitimate administrative infrastructure.
+3. **Proactive Vulnerability Management:** A SIEM is not just for catching active attacks. By automatically cross-referencing endpoint software inventories against global CVE feeds, a SOC can identify and patch misconfigurations (like outdated VM tools) before an adversary can exploit them.
+
